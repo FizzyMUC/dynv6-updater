@@ -17,8 +17,7 @@ if [ -n "$device" ]; then
   device="dev $device"
 fi
 
-#v4_address=$(ip -4 addr list $device | grep "global" | sed -n 's/.*inet \([0-9.]\+\).*/\1/p' | head -n 1);
-v4_address=$(curl -sS http://my.ip.fi);
+v4_address=$(curl -s http://checkip.amazonaws.com/);
 
 if [ -e /usr/bin/curl ]; then
   bin="curl -fsS -o /dev/null"
@@ -39,7 +38,7 @@ echo "detected address ${current}, validating..."
 
 if [ "$old" = "$current" ]; then
   # when running via cron we do not need that kind of verbosity.
-  #echo "IPv4 address unchanged"
+  echo "IPv4 address unchanged"
   exit
 fi
 

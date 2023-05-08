@@ -1,10 +1,9 @@
 #!/bin/bash
+
+# DYNV6_ZONES from environmental variables added to myarray
 myarray=(`echo $DYNV6_ZONES | tr ',' ' '`)
 
-#echo "My array: ${myarray[@]}"
-#echo "Number of elements in the array: ${#myarray[@]}"
-
+# Iterate over myarray and call update process for each element
 for (( i=0; i<=${#myarray[@]}-1; i++ )); do
-    #echo "#$i: ${myarray[$i]}"
     token=$DYNV6_TOKEN /code/dynv6.sh "${myarray[$i]}"
 done
